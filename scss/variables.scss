@@ -1,4 +1,9 @@
 $main-font:"Roboto", sans-serif;
-%margin-bottom{
-    margin-bottom: 80px;
+$main-bgc:#EFEFEF;
+$second-bgc:#F13C6E;
+
+%flex-between{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

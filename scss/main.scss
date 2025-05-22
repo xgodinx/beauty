@@ -3,25 +3,14 @@
 @import "mixins";
 @import "layout";
 
-body{
-  height: 100%;
-  font-family: $main-font;
-}
-.wrapper {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+
 ///////////              header
 .header {
   background-color: #EFEFEF;
   margin-bottom: 20px;
-}
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 20px;
+  @include respond(sm){
+   margin-bottom: 10px;
+  }
 }
 .menu {
   margin: 0 auto;
@@ -31,11 +20,17 @@ body{
       gap: 30px;
       padding: 17px 0;
       flex-wrap: wrap;
+      @include respond(sm){
+         gap: 15px;
+  }
 		}
     li{
       a {
       color: #333333;
       font-size: 14px;
+      @include respond(sm){
+         font-size: 16px;
+         }
       }
     }
 }
@@ -47,10 +42,15 @@ body{
 }
 .brand {
   margin-bottom: 50px;
+  @include respond(md){
+      margin-bottom: 25px;
+   }
 		&__info {
-      display: flex;
-      justify-content: space-between;
-      
+      @include flex-between;
+      @include respond(581px){
+         @include flex-column;
+            align-items: center;
+      }
 		}
 
 		&__brand {
@@ -65,26 +65,42 @@ body{
       font-weight: 700;
       font-size: 36px;
       line-height: 1;
-      color: #F13C6E;
+      color: $second-bgc;
 		}
 
 		&__contacts {
       display: flex;
       align-items: center;
       gap: 40px;
+      @include respond(sm){
+         @include flex-column;
+         gap: 20px;
+         width: 100%;
+      }
+      @include respond(md){
+         gap: 20px;
+      }
 		}
 
-		&__tel {
+		&__tel a {
       cursor: pointer;
+      color: #000000;
+      @include respond(581px){
+         font-size: 20px;
+      }
 		}
 
 		&__cta {
-      border: 2px solid #F13C6E;
-      border-radius: 40px;
-      padding: 0 26px;
-      line-height: 2.7;
-      font-size: 14px;
-      color: #000000;
+      @extend %cta;
+      @include respond(sm){
+         font-size: 20px;
+         width: 100%;
+         text-align: center;
+      }
+      @include respond(581px){
+         font-size: 20px;
+         line-height: 2.2;
+      }
 		}
 }
 
@@ -93,22 +109,36 @@ body{
 
 .service {
   margin: 0 auto 30px;
+  @include respond(md){
+   margin-bottom: 20px
+  }
 		&__service {
       
 		}
 
 		&__list {
-      display: flex;
+      @include flex-between;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 40px;
+      @include respond(md){
+         justify-content: space-between;
+         gap: 20px;
+      }
+      @include respond(581px){
+         gap: 20px;
+         flex-direction: column;
+         align-items: flex-start;
+         
+      }
 		}
     li{
       a{
         text-decoration: none;
         color: #000000;
         font-size: 16px;
-        
+        @include respond(581px){
+         font-size: 24px;
+         }
       }
     }
 }
@@ -116,23 +146,38 @@ body{
 ///                  boss-block
 
 .boss-block {
-  background-color: #F13C6E;
+  background-color: $second-bgc;
   overflow: hidden;
   padding: 192px 0;
-  
+  @include respond(581px){
+         padding: 80px 0;
+      }
+   @include respond(sm){
+         padding: 30px 0;
+      }
 }
 
 .chair {
+   
 		&__block {
-      display: flex;
+      @include flex-between;
+      @include respond(sm){
+         @include flex-column;
+         align-items: center;
+      }
       
 		}
 
 		&__info {
-      display: flex;
-      flex-direction: column;
+      @include flex-column;
       color: #FFFFFF;
-      max-width: 308px;
+      max-width: 298px;
+      position: relative;
+      z-index: 5;
+      @include respond(sm){
+         margin-bottom: 20px;
+         text-align: center;
+      }
 		}
 
 		&__title {
@@ -140,20 +185,35 @@ body{
       font-weight: 700;
       margin-bottom: 50px;
       white-space: nowrap;
+      @include respond(sm){
+         font-size: 36px;
+         margin-bottom: 20px;
+      }
+      @include respond(581px){
+         font-size: 44px;
+         margin-bottom: 20px;
+      }
 		}
 
 		&__text {
       font-size: 14px;
       line-height: 20px;
       margin-bottom: 38px;
+      @include respond(sm){
+         margin-bottom: 20px;
+      }
 		}
     &__btn{
-      max-width: 170px;
+      max-width: 50%;
       border: 2px solid #FFFFFF;
       border-radius: 40px;
       padding: 12px 26px;
       line-height: 1;
-    }
+      @include respond(sm){
+         margin: 0 auto;
+         width: 100%;
+      }
+      }
 		&__cta {
       display: block;
       color: #FFFFFF;
@@ -164,45 +224,48 @@ body{
 
 		&__img {
       position: relative;
-      left: 35%;
-      &::before, &::after{
+      left: 0%;
+      &::before, 
+      &::after{
         content: "";
         position: absolute;
         left: 0%;
         bottom: 0%;
         border-radius: 50%;
-
+        width: 200px;
+        height: 200px;
+        @include respond(sm){
+         width: 150px;
+         height: 150px;
+         top: -30%;
+         left: 10%;
+      }
       }
       &::before{
         background-color: #F9ADC2;
-        width: 200px;
-        height: 200px;
         transform: translate(-12%, 0%) scale(3.5);
         z-index: 2;
       }
       &::after{
         background-color: #F57699;
-        width: 200px;
-        height: 200px;
         transform: translate(-15%, 0%) scale(4.5);
         z-index: 1;
       }
-
-
-
       img{
        position: relative;
        z-index: 3;
-
       }
 		}
 }
 
 .offers {
-    background-color: #EFEFEF;
+    background-color: $main-bgc;
     padding: 80px 0 100px;
+    @include respond(md){
+         padding: 50px 0;
+      }
 		&__block {
-      padding: 0 15px;
+      
 		}
     &__title{
       font-weight: 700;
@@ -212,27 +275,45 @@ body{
       margin-bottom: 38px;
     }
 		&__row {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin: 0 -30px;
-      
+      @include flex-between;
+      @media (max-width:980px) {
+         @include flex-column;
+         gap: 20px;
+         }
 		}
     &__column{
-      flex: 0 1 25%;
-      padding: 0 15px;
-      
-    }
-		&__item {
+      background-color: #ffffff;
+      padding: 25px 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      background-color: #fff;
-      padding: 25px 30px;
-      gap: 20px 0;
+      gap: 20px;
+      // height: 100%;
+      @media (max-width:980px) {
+         @include flex-between;
+         justify-content: space-between;
+         align-items: center;
+         padding: 25px 50px;
+         }
+         @include respond(md){
+            @include flex-column;
+         }
+    }
+		&__item {
+         @include flex-column;
+         align-items: center;
+         gap: 20px;
+         @media (max-width:980px) {
+         @include flex-between;
+         justify-content: space-between;
+         align-items: center;
+         @include respond(md){
+            @include flex-column;
+         }
+         }
 		}
-
+      
 		&__img {
+         
 		}
 
 		&__text {
@@ -240,63 +321,82 @@ body{
       line-height: 1.41;
       color: #333333;
       text-align: center;
+      
+      
       // max-width: 170px;
 		}
-
+      &__buy{
+         
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 20px;
+         @media (max-width:980px) {
+         @include flex-between;
+         justify-content: space-between;
+         align-items: center;
+         @include respond(md){
+            @include flex-column;
+         }
+         }
+      }
 		&__price {
       color: #000000;
       font-weight: 500;
       font-size: 21px;
       letter-spacing: 0.05em;
+      
 		}
 
 		&__cta {
       color: #FFFFFF;
       font-size: 14px;
       letter-spacing: 0.05em;
-      background-color: #F13C6E;
+      background-color: $second-bgc;
       border-radius: 30px;
       padding: 9px 52px;
 		}
 }
 
 .about {
-  background-color: #EFEFEF;
+  background-color: $main-bgc;
   padding-bottom: 100px;
+  @include respond(md){
+         padding-bottom: 60px;
+      }
 		&__us {
       
 		}
 
 		&__row {
-      display: flex;
-      flex-wrap: wrap;
-      
-      align-items: center;
+      @include flex-between;
       gap: 30px;
+      align-items: stretch;
 		}
 
 		&__column {
       flex: 1 1 auto;
-      
 		}
 
 		&__item {
-      padding: 35px 43px;
-      display: flex;
-      flex-direction: row;
-      
-      background-color: #F13C6E;
-      justify-content: space-between;
+      @include flex-between;
       align-items: center;
+      background-color: $second-bgc;
+      height: 100%;
+      padding: 35px 40px;
+      @include respond(sm){
+         padding: 20px;
+         @include flex-column;
+      }
 		}
 
 		&__info {
-      display: flex;
-      flex-direction: column;
+      @include flex-column;
       gap: 25px;
       color: #FFFFFF;
-      flex: 0 0 50%;
-      
+      @include respond(sm){
+         align-items: center;
+      }
 		}
 
 		&__title {
@@ -306,20 +406,28 @@ body{
 
 		&__text {
       font-size: 14px;
+      max-width: 125px;
+      line-height: 1.4;
+      @include respond(sm){
+         max-width: 100%;
+         text-align: center;
+      }
 		}
 
 		&__email {
       input{
         border-radius: 30px;
         color: #C4C4C4;
-        padding: 9px 45px 9px 25px ;
+        padding: 9px 35px 9px 25px ;
       }
 		}
 
 		&__img {
+         
+         
       img{
-        width: 140px;
-        height: 140px;
+        object-fit: cover;
+        height: 100%;
       }
 		}
 
@@ -335,21 +443,38 @@ body{
       color: #FFFFFF;
       padding: 9px 45px;
       text-align: center;
+      @include respond(sm){
+         margin-bottom: 20px;
+      }
 		}
 }
 
 
 .impuls {
-  background-color: #EFEFEF;
+  background-color: $main-bgc;
 		&__block {
       background-color: #FFFFFF;
       padding: 35px 60px;
+      @include respond(581px){
+         padding: 20px 30px;
+      }
+      @include respond(lg){
+         padding: 25px 40px
+         
+      }
 		}
 
 		&__row {
-      display: flex;
-      justify-content: space-around;
-      gap: 130px;
+      @include flex-between;
+      gap: 100px;
+      @include respond(md){
+         @include flex-column;
+         align-items: center;
+         
+      }
+      @include respond(lg){
+         gap: 18px;
+      }
       &:not(:last-child){
         margin-bottom: 70px;
       }
@@ -357,6 +482,7 @@ body{
 		}
 
 		&__item {
+
 		}
 }
 
@@ -364,17 +490,36 @@ body{
 
 		&__block {
       margin: 60px 0 100px;
+      @include respond(md){
+         margin: 30px 30px;
+      }
 		}
 
 		&__row {
-      display: flex;
-      justify-content: space-between;
+      @include flex-between;
+      @include respond(581px){
+         flex-direction: column;
+         gap: 20px;
+         align-items: center;
+      }
 		}
 
 		&__column {
+      @include respond(md){
+         
+         flex: 1 1 50%;
+      }
+         
 		}
 
 		&__item {
+         @include respond(md){
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin-bottom: 20px;
+         
+      }
 		}
 
 		&__title {
@@ -383,6 +528,9 @@ body{
       line-height: 1.4;
       color: #000000;
       font-size: 16px;
+      @include respond(md){
+         margin-bottom: 20px;
+      }
 		}
 
 		&__list {
@@ -391,6 +539,9 @@ body{
           color: #828282;
           font-size: 12px;
           line-height: 28px;
+          @include respond(581px){
+            font-size: 16px;
+      }
         }
       }
 		}
@@ -401,17 +552,25 @@ body{
 
 		&__block {
       padding-bottom: 38px;
+      @include respond(581px){
+         padding-bottom: 10px;
+      }
 		}
 
 		&__row {
-      display: flex;
-      justify-content: space-between;
+      @include flex-between;
+      @include respond(581px){
+         @include flex-column;
+         gap: 20px;
+      }
 		}
 
 		&__social {
-      display: flex;
-      justify-content: space-between;
+      @include flex-between;
       gap: 20px;
+      @include respond(581px){
+         justify-content: space-evenly;
+      }
       img{
         width: 45px;
         height: 45px;
@@ -421,20 +580,14 @@ body{
         overflow: visible;
       }
 		}
-
-		&__yt {
-		}
-
-		&__fb {
-		}
-
-		&__inst {
-		}
-
 		&__data {
       display: flex;
       align-items: center;
       gap: 40px;
+      @include respond(581px){
+         flex-direction: column;
+         gap: 20px;
+      }
 		}
 }
 
@@ -443,6 +596,9 @@ body{
   background-color: #EFEFEF;
 		&__block {
       padding: 25px 0;
+      @include respond(581px){
+         padding: 10px 0;
+      }
 		}
 
 		&__row {
@@ -451,18 +607,9 @@ body{
       align-items: center;
       color: #828282;
       font-size: 12px;
+      @include respond(581px){
+         @include flex-column;
+         gap: 5px;
+      }
 		}
-
-		&__rights {
-		}
-
-		&__policy {
-		}
-}
-
-
-
-
-.footer{
-
 }
