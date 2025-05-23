@@ -93,7 +93,8 @@ body {
 .brand__name {
   font-weight: 700;
   font-size: 36px;
-  line-height: 1;
+  letter-spacing: 3.6px;
+  line-height: 39px;
   color: #F13C6E;
 }
 .brand__contacts {
@@ -177,18 +178,18 @@ body {
   }
 }
 
-.boss-block {
+.hero-block {
   background-color: #F13C6E;
   overflow: hidden;
   padding: 192px 0;
 }
 @media (max-width: 581px) {
-  .boss-block {
+  .hero-block {
     padding: 80px 0;
   }
 }
 @media (max-width: 481px) {
-  .boss-block {
+  .hero-block {
     padding: 30px 0;
   }
 }
@@ -270,7 +271,12 @@ body {
 }
 .chair__img {
   position: relative;
-  left: 0%;
+  left: -20%;
+}
+@media (max-width: 768px) {
+  .chair__img {
+    left: 0%;
+  }
 }
 .chair__img::before, .chair__img::after {
   content: "";

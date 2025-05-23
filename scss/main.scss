@@ -64,7 +64,8 @@
 		&__name {
       font-weight: 700;
       font-size: 36px;
-      line-height: 1;
+      letter-spacing: 3.6px;
+      line-height: 39px;
       color: $second-bgc;
 		}
 
@@ -143,9 +144,9 @@
     }
 }
 
-///                  boss-block
+///                  hero-block
 
-.boss-block {
+.hero-block {
   background-color: $second-bgc;
   overflow: hidden;
   padding: 192px 0;
@@ -161,6 +162,7 @@
    
 		&__block {
       @include flex-between;
+      
       @include respond(sm){
          @include flex-column;
          align-items: center;
@@ -225,7 +227,10 @@
 
 		&__img {
       position: relative;
-      left: 0%;
+      left: -20%;
+      @include respond(md){
+         left: 0%;
+      }
       &::before, 
       &::after{
         content: "";
