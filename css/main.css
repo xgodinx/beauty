@@ -81,7 +81,7 @@ body {
   }
   100% {
     fill: lime;
-    stroke: rgb(236, 175, 228);
+    stroke: rgb(229, 255, 0);
     stroke-width: 5px;
     opacity: 0.3;
   }
